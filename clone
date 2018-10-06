@@ -1,0 +1,23 @@
+#!/bin/bash
+
+read -p "Enter the repo url: " url
+
+sudo git clone --recursive ${url}
+
+read -p "Do you want to use a virtual env (y/n)? " env
+
+if [[ $env == "y" ]]; then
+	read -p "Enter the name of your virtual env: " envname
+
+	if [ -e ~/.virtualenvs/"${envname}" ]; then
+		echo "Virtual Env already exists"
+		#source ~/.virtualenvs/"${envname}"/bin/activate
+
+	else
+		echo "Creating new Virtual Env with name ${envname}"
+		virtualenv ~/.virtualenvs/"${envname}"
+		#source "~/.virtualenvs/${envname}/bin/activate"
+	fi
+fi
+
+echo "Done"
